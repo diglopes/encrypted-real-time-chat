@@ -1,0 +1,14 @@
+{
+  "name": "encrypted-real-time-chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "repository": "git@github.com:diglopes/encrypted-real-time-chat.git",
+  "author": "Diego Lopes <diego-chez@hotmail.com>",
+  "license": "MIT"
+}
