@@ -1,7 +1,7 @@
 {
   "name": "@encrypted-real-time-chat/eslint-config",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": ".eslintrc",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^7.7.0",

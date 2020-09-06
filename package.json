@@ -10,5 +10,8 @@
   },
   "repository": "git@github.com:diglopes/encrypted-real-time-chat.git",
   "author": "Diego Lopes <diego-chez@hotmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@encrypted-real-time-chat/eslint-config": "*"
+  }
 }
