@@ -1,4 +1,3 @@
-/*eslint-disable*/
 const config = {
     "root":true,
     "parser": "@typescript-eslint/parser",
