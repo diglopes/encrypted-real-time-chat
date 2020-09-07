@@ -42,4 +42,23 @@ describe('Dummy User', () => {
     const userFound = dummyUser.get('inexistent-id');
     expect(userFound).toBe(undefined);
   });
+
+  it('should remove an user by id and return true', () => {
+    const user1 = {
+      id: 'fake-id-1',
+      username: 'any-username-1',
+      room: 'fake-room',
+    };
+    const user2 = {
+      id: 'fake-id-2',
+      username: 'any-username-2',
+      room: 'fake-room',
+    };
+    const dummyUser = new DummyUser();
+    dummyUser.add(user1);
+    dummyUser.add(user2);
+    const hasRemoved = dummyUser.remove(user1.id);
+    expect(dummyUser.get()).toEqual([user2]);
+    expect(hasRemoved).toBeTruthy();
+  });
 });
