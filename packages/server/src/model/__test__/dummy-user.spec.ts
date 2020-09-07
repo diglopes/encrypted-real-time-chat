@@ -18,4 +18,22 @@ describe('Dummy User', () => {
     expect(dummyUser.get()).toEqual([user]);
     expect(result).toBeTruthy();
   });
+
+  it('should get an user by id if the user is found', () => {
+    const user1 = {
+      id: 'fake-id-1',
+      username: 'any-username-1',
+      room: 'fake-room',
+    };
+    const user2 = {
+      id: 'fake-id-2',
+      username: 'any-username-2',
+      room: 'fake-room',
+    };
+    const dummyUser = new DummyUser();
+    dummyUser.add(user1);
+    dummyUser.add(user2);
+    const userFound = dummyUser.get(user1.id);
+    expect(userFound).toEqual(user1);
+  });
 });

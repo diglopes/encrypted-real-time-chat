@@ -7,8 +7,11 @@ export interface User {
 export class DummyUser {
   constructor(private users: Array<User> = []) {}
 
-  public get(): Array<User> {
-    return this.users;
+  public get(id?: string): Array<User> | User {
+    if (!id) return this.users;
+    const getUserById = (user) => (user.id = id);
+    const user = this.users.find(getUserById);
+    return user;
   }
 
   public add(user: User): boolean {
