@@ -36,4 +36,10 @@ describe('Dummy User', () => {
     const userFound = dummyUser.get(user1.id);
     expect(userFound).toEqual(user1);
   });
+
+  it('should return `undefined` if the user id is not found', () => {
+    const dummyUser = new DummyUser();
+    const userFound = dummyUser.get('inexistent-id');
+    expect(userFound).toBe(undefined);
+  });
 });
