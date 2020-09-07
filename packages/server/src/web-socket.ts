@@ -1,11 +1,12 @@
 import socket, { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
-import { DummyUser } from './model/dummy-user';
+import { User } from './model/dummy-user';
 
 export enum SOCKET_EVENTS {
   CONNECTION = 'connection',
   JOIN_ROOM = 'joinRoom',
   MESSAGE = 'message',
+  CHAT = 'chat',
 }
 
 export class WebSocket {
@@ -34,6 +35,15 @@ export class WebSocket {
           userId: user.id,
           username,
           text: `${username} has joined the chat`,
+        });
+      });
+
+      socket.on(SOCKET_EVENTS.CHAT, (text) => {
+        const user: User = dummyUser.get(socket.id);
+        this.io.to(user.room).emit(SOCKET_EVENTS.MESSAGE, {
+          userId: user.id,
+          username: user.username,
+          text,
         });
       });
     });
