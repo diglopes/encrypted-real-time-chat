@@ -14,8 +14,11 @@ export type Predicate<T> = (value: T, index: number, obj: T[]) => unknown;
 export class DummyUser {
   constructor(private users: Array<User> = []) {}
 
-  public get(id?: string): Array<User> | User {
-    if (!id) return this.users;
+  public get(): Array<User> {
+    return this.users;
+  }
+
+  public getById(id: string): User {
     const user = this.users.find(this._getUserById(id));
     return user;
   }
