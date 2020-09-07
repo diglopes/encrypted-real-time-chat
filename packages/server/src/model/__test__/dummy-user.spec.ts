@@ -61,4 +61,10 @@ describe('Dummy User', () => {
     expect(dummyUser.get()).toEqual([user2]);
     expect(hasRemoved).toBeTruthy();
   });
+
+  it('should return `false` when trying to remove a user but no user is found', () => {
+    const dummyUser = new DummyUser();
+    const hasRemoved = dummyUser.remove('fake-id');
+    expect(hasRemoved).toBe(false);
+  });
 });

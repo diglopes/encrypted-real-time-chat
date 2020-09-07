@@ -31,6 +31,7 @@ export class DummyUser {
       this.users.splice(userIndex, USER_FLAGS.REMOVE_AMOUNT);
       return true;
     }
+    return false;
   }
 
   private _getUserById(id): Predicate<User> {
