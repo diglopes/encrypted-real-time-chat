@@ -1,12 +1,13 @@
 import socket, { Server } from 'socket.io';
 import { Server as HttpServer } from 'http';
-import { User } from './model/dummy-user';
+import { DummyUser } from './model/dummy-user';
 
 export enum SOCKET_EVENTS {
   CONNECTION = 'connection',
   JOIN_ROOM = 'joinRoom',
   MESSAGE = 'message',
   CHAT = 'chat',
+  DISCONNECT = 'disconnect',
 }
 
 export class WebSocket {
@@ -39,12 +40,24 @@ export class WebSocket {
       });
 
       socket.on(SOCKET_EVENTS.CHAT, (text) => {
-        const user: User = dummyUser.get(socket.id);
+        const user = dummyUser.getById(socket.id);
         this.io.to(user.room).emit(SOCKET_EVENTS.MESSAGE, {
           userId: user.id,
           username: user.username,
           text,
         });
+      });
+
+      socket.on(SOCKET_EVENTS.DISCONNECT, () => {
+        const user = dummyUser.getById(socket.id);
+        const hasRemoved = dummyUser.remove(user.id);
+        if (user && hasRemoved) {
+          socket.to(user.room).emit(SOCKET_EVENTS.MESSAGE, {
+            userId: user.id,
+            username: user.username,
+            text: `${user.username} has left the chat`,
+          });
+        }
       });
     });
   }
